@@ -1,84 +1,72 @@
-==
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Digital Clock</title>
-    <style>
+<html><body><pre>index.html
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Live Digital Clock&lt;/title&gt;
+    &lt;style&gt;
         body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .container {
-            text-align: center;
+        .clock {
+            font-size: 5rem;
         }
 
-        #clock {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .button {
+        .toggle-theme-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             padding: 10px 20px;
-            font-size: 1em;
             cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-            transition: background-color 0.3s;
         }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
+        
+        /* Light theme styles */
         .light-theme {
             background-color: #ffffff;
             color: #000000;
         }
 
+        /* Dark theme styles */
         .dark-theme {
             background-color: #000000;
             color: #ffffff;
         }
-    </style>
-</head>
-<body class="light-theme">
-    <div class="container">
-        <div id="clock">00:00:00</div>
-        <button class="button" onclick="toggleTheme()">Toggle Theme</button>
-    </div>
-    <script>
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class="light-theme"&gt;
+    &lt;div class="clock" id="clock"&gt;--:--:--&lt;/div&gt;
+    &lt;button class="toggle-theme-btn" id="toggleThemeBtn"&gt;Toggle Theme&lt;/button&gt;
+    
+    &lt;script&gt;
         function updateClock() {
-            const clock = document.getElementById('clock');
+            const clockElement = document.getElementById('clock');
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            clock.textContent = `${hours}:${minutes}:${seconds}`;
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
         }
 
         function toggleTheme() {
             const body = document.body;
-            if (body.classList.contains('light-theme')) {
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-            } else {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-            }
+            body.classList.toggle('light-theme');
+            body.classList.toggle('dark-theme');
         }
 
-        setInterval(updateClock, 1000);
+        document.getElementById('toggleThemeBtn').addEventListener('click', toggleTheme);
+
         updateClock();
-    </script>
-</body>
-</html>
+        setInterval(updateClock, 1000);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```</pre></body></html>
